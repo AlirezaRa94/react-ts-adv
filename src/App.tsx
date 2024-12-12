@@ -1,15 +1,19 @@
 import { useRef } from "react";
+
 import Button from "./components/Button";
 import Container from "./components/Container";
 import Input from "./components/Input";
-import Form from "./components/Form";
+import Form, { type FormHandle } from "./components/Form";
 
 function App() {
   const inputEl = useRef<HTMLInputElement>(null);
+  const formEl = useRef<FormHandle>(null);
 
   function handleFormSubmit(data: unknown) {
     const extractedData = data as { email: string; password: string };
     console.log(extractedData);
+
+    formEl.current?.clear();
   }
 
   return (
@@ -27,7 +31,7 @@ function App() {
       <Container as='button' type='submit'>
         Click Me
       </Container>
-      <Form onSave={handleFormSubmit}>
+      <Form onSave={handleFormSubmit} ref={formEl}>
         <Input id='email' label='Your Email' type='email' />
         <Input id='password' label='Your Password' type='password' />
         <Button el='button'>Submit</Button>
