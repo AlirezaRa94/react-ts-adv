@@ -1,42 +1,16 @@
-import { useRef } from "react";
-
-import Button from "./components/Button";
-import Container from "./components/Container";
-import Input from "./components/Input";
-import Form, { type FormHandle } from "./components/Form";
+import AddTimer from "./components/AddTimer.tsx";
+import Header from "./components/Header.tsx";
+import Timers from "./components/Timers.tsx";
 
 function App() {
-  const inputEl = useRef<HTMLInputElement>(null);
-  const formEl = useRef<FormHandle>(null);
-
-  function handleFormSubmit(data: unknown) {
-    const extractedData = data as { email: string; password: string };
-    console.log(extractedData);
-
-    formEl.current?.clear();
-  }
-
   return (
-    <main>
-      <Input id='name' label='Your Name' type='text' ref={inputEl} />
-      <Input id='age' label='Your Age' type='number' />
-      <p>
-        <Button el='button'>Submit</Button>
-      </p>
-      <p>
-        <Button el='a' href='/'>
-          Cancel
-        </Button>
-      </p>
-      <Container as='button' type='submit'>
-        Click Me
-      </Container>
-      <Form onSave={handleFormSubmit} ref={formEl}>
-        <Input id='email' label='Your Email' type='email' />
-        <Input id='password' label='Your Password' type='password' />
-        <Button el='button'>Submit</Button>
-      </Form>
-    </main>
+    <>
+      <Header />
+      <main>
+        <AddTimer />
+        <Timers />
+      </main>
+    </>
   );
 }
 
